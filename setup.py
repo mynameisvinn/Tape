@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import os
 
 setup(
-   name = 'Tapeworm',
+   name = 'Tape',
    version = '1.0',
    description = 'logging function invocations in python',
    author = 'vin tang',
