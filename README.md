@@ -1,5 +1,5 @@
 # Tape
-Tape tracks function calls so developers know when and how their code is used.
+Tape tracks function calls so developers know when and how their code is used. 
 
 ## An example
 You invented a new method called `add_one`:
@@ -8,9 +8,9 @@ You invented a new method called `add_one`:
 def add_one(x):
     return x + 1
 ```
-You'd like to know when `add_one` is invoked by users. 
+You'd like to know when `add_one` is invoked by users. After all, just because you've open sourced your software doesn't mean you shouldn't know how it's used.
 
-You can find out how often its invoked by adding a single Tape decorator:
+With Tape, you can simply add a `@tape` decorator to the function of interest:
 ```python
 # add.py
 from Tape import tape
@@ -19,21 +19,23 @@ from Tape import tape
 def add_one(x):
     return x + 1
 ```
-That's it. Going forward, invocations of `add_one` are logged.
+And that's it. Going forward, invocations of `add_one` are logged and counted.
 
-Importantly, the end user experience remains unchanged:
+### User Experience is unchanged
+Importantly, the end user experience remains identical:
 ```python
 # from the user's perspective
 from add import add_one
+
 add_one(2)  # returns 3
 ```
 ### Querying
-Tabulated counts can be retrieved with:
+Tabulated counts can be retrieved:
 ```bash
-curl -i "http://localhost:5000/api?package=add_package&func=add_one"
+curl -i "http://18.209.241.43:5000/api?package=add_package&func=add_one"  # youll need to know your package name and function name
 ```
 
-## Install
+## Install Tape
 ```bash
 git clone https://github.com/mynameisvinn/Tape
 python setup.py install
