@@ -5,7 +5,6 @@ from flask import Flask, jsonify, request, abort
 app = Flask(__name__)
 
 counter = {}
-namespace = {}
 
 @app.route('/')
 def landing():
@@ -21,30 +20,33 @@ def log():
     if not request.json:
         abort(400)
     else:
-        print("func_name", request.json['func_name'])
-        print("source", request.json['source'])
-        print("key", request.json['key'])
 
-        key = request.json['key']
-        if key not in counter.keys():
-            counter[key] = 1
+        package_name = request.json['package_name']
+        func_name = request.json['func_name']
 
-            func_name = request.json['func_name']
-            namespace[func_name] = key
+        if package_name not in counter.keys():
+            counter[package_name] = {func_name: 1}
+
+        elif package_name in counter.keys() and (func_name not in counter[package_name].keys()):
+            counter[package_name][func_name] = 1
         else:
-            counter[key] += 1
+            counter[package_name][func_name] += 1
 
         # return jsonify({"success": 1})
 
 
-@app.route("/api/<func_name>", methods=['GET'])
-def query(func_name):
-    if func_name in namespace.keys():
-        key = namespace[func_name]
-        count = counter[key]
-        return jsonify({"func_name": func_name, "count": count})
-    else:
-        return jsonify({"func_name": func_name, "count": 0})
+@app.route("/api", methods=['GET'])
+def query():
+    """retrieve count for a given package:func.
+    """
+    package = request.args.get('package')
+    func = request.args.get('func')
+    identifier = package + ':' + func
+
+    try:
+        return jsonify({identifier: counter[package][func]})
+    except:
+        return "package:method does not exist"
 
 
 if __name__ == '__main__':

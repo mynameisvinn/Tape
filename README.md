@@ -1,32 +1,43 @@
-# tapeworm
-tapeworm tracks function calls so you can understand how code is used.
+# Tape
+Tapeworm tracks function calls so you know when your code is used.
 
-
-## example
-you invented a new function called `add_one`:
+## An example
+You invented a new function called `add_one`:
 ```python
 # add.py
 
 def add_one(x):
     return x + 1
 ```
-youd like to know when `add_one` is invoked by users. 
+You'd like to know when `add_one` is invoked by users. 
 
-with tapeworm, you can find out by adding a single decorator to source:
+With Tape, you can find out by adding a single decorator to your method:
 ```python
 # add.py
-from tapeworm import worm
+from Tapeworm import tape
 
-@tape
+@tape("mypackage")  # package name
 def add_one(x):
     return x + 1
 ```
-that's it. going forward, future invocations of `add_one` are logged.
+That's it. Going forward, future invocations of `add_one` are logged and counted.
 
-importantly, the user experience remains unchanged:
+Importantly, the end user experience remains unchanged:
 ```python
 # from the user's perspective
 from add import add_one
 
 add_one(2)  # returns 3
 ```
+
+Finally, you can query with:
+```bash
+curl -i "http://localhost:5000/api?package=mypackage&func=add_one"
+```
+
+## install
+```bash
+git clone https://github.com/mynameisvinn/Tape
+python setup.py install
+```
+
