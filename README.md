@@ -15,11 +15,11 @@ With Tape, you can simply add a `@tape` decorator to the function of interest:
 # add.py
 from Tape import tape
 
-@tape("add_package")
+@tape("add_package")  # <--- a single decorator is added
 def add_one(x):
     return x + 1
 ```
-And that's it. Going forward, invocations of `add_one` are logged and counted.
+And that's it. Going forward, invocations of `add_one` are logged and counted, even if it is executed remotely.
 
 ### User Experience is unchanged
 Importantly, the end user experience remains identical:
