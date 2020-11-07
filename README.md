@@ -19,7 +19,7 @@ from Tape import tape
 def add_one(x):
     return x + 1
 ```
-That's it. Going forward, future invocations of `add_one` are logged.
+That's it. Going forward, invocations of `add_one` are logged.
 
 Importantly, the end user experience remains unchanged:
 ```python

@@ -3,3 +3,5 @@ __pycache__/
 .DS_Store
 Tapeworm.egg-info/
 dist/
+Tape.egg-info/
+build/lib/Tape/
